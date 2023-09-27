@@ -1,10 +1,11 @@
-package cc.cc3c.hive.domain;
+package cc.cc3c.hive.domain.repository;
 
 import cc.cc3c.hive.domain.entity.HiveRecord;
 import cc.cc3c.hive.domain.model.HiveRecordSource;
 import cc.cc3c.hive.domain.model.HiveRecordStatus;
 import cc.cc3c.hive.domain.repository.HiveRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.Assert;
