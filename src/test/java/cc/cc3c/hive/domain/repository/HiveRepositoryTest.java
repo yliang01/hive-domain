@@ -7,6 +7,7 @@ import cc.cc3c.hive.domain.repository.HiveRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,13 +15,14 @@ import org.testng.annotations.Test;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+@ActiveProfiles("test")
 @DataJpaTest
 public class HiveRepositoryTest extends AbstractTransactionalTestNGSpringContextTests {
     @Autowired
     HiveRecordRepository hiveRecordRepository;
 
     @Test
-    public void a() {
+    public void test() {
         HiveRecord hiveRecord = HiveRecord.builder()
                 .fileName("fileName")
                 .fileKey("fileKey")
