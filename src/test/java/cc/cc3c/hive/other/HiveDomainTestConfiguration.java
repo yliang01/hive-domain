@@ -1,4 +1,4 @@
-package cc.cc3c.hive.domain;
+package cc.cc3c.hive.other;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

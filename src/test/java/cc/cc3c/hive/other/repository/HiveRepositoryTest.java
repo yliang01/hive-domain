@@ -1,12 +1,11 @@
-package cc.cc3c.hive.domain.repository;
+package cc.cc3c.hive.other.repository;
 
 import cc.cc3c.hive.domain.entity.HiveRecord;
 import cc.cc3c.hive.domain.model.HiveRecordSource;
 import cc.cc3c.hive.domain.model.HiveRecordStatus;
 import cc.cc3c.hive.domain.repository.HiveRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.Assert;
@@ -16,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @ActiveProfiles("test")
-@DataJpaTest
+@SpringBootTest
 public class HiveRepositoryTest extends AbstractTransactionalTestNGSpringContextTests {
     @Autowired
     HiveRecordRepository hiveRecordRepository;
