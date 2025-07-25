@@ -1,5 +1,6 @@
 package cc.cc3c.hive.domain.entity;
 
+import cc.cc3c.hive.domain.model.HiveDownloadStatus;
 import cc.cc3c.hive.domain.model.HiveRecordSource;
 import cc.cc3c.hive.domain.model.HiveRecordStatus;
 import jakarta.persistence.*;
@@ -28,5 +29,8 @@ public class HiveRecord {
     private HiveRecordStatus status;
     private LocalDateTime lastSyncTime;
     private Boolean deletable;
-    private Boolean deleted;
+    private Boolean deleted = false;
+    private LocalDateTime restoreTime;
+    @Enumerated(EnumType.STRING)
+    private HiveDownloadStatus downloadStatus;
 }
