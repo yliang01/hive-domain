@@ -34,7 +34,7 @@ public class HiveRepositoryTest extends AbstractTransactionalTestNGSpringContext
                 .deletable(true)
                 .build();
         hiveRecordRepository.save(hiveRecord);
-        Optional<HiveRecord> fileKey = hiveRecordRepository.findByFileKey("fileKey");
+        Optional<HiveRecord> fileKey = hiveRecordRepository.findBySourceAndFileKey("fileKey");
         Assert.assertTrue(fileKey.isPresent());
     }
 }

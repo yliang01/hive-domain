@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public interface HiveRecordRepository extends JpaRepository<HiveRecord, Integer> {
 
-    Optional<HiveRecord> findByFileKey(String fileKey);
+    Optional<HiveRecord> findBySourceAndFileKey(HiveRecordSource source, String fileKey);
 
     List<HiveRecord> findBySourceAndDeletedIsFalse(HiveRecordSource source);
 
