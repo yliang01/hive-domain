@@ -1,7 +1,7 @@
 package cc.cc3c.hive.other.repository;
 
 import cc.cc3c.hive.domain.entity.HiveRecord;
-import cc.cc3c.hive.domain.model.HiveRecordSource;
+import cc.cc3c.hive.domain.model.HiveStorageProvider;
 import cc.cc3c.hive.domain.model.HiveRecordStatus;
 import cc.cc3c.hive.domain.repository.HiveRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,8 @@ public class HiveRepositoryTest extends AbstractTransactionalTestNGSpringContext
                 .fileName("fileName")
                 .fileKey("fileKey")
                 .zipped(true)
-                .source(HiveRecordSource.ALIBABA_STANDARD)
+                .provider(HiveStorageProvider.ALIBABA)
+                .bucketName("test-bucket")
                 .size(1L)
                 .updateTime(LocalDateTime.now())
                 .status(HiveRecordStatus.UPLOADED)
@@ -34,7 +35,7 @@ public class HiveRepositoryTest extends AbstractTransactionalTestNGSpringContext
                 .deletable(true)
                 .build();
         hiveRecordRepository.save(hiveRecord);
-        Optional<HiveRecord> fileKey = hiveRecordRepository.findBySourceAndFileKey(HiveRecordSource.ALIBABA_STANDARD, "fileKey");
+        Optional<HiveRecord> fileKey = hiveRecordRepository.findByBucketNameAndFileKeyAndDeletedIsFalse("test-bucket", "fileKey");
         Assert.assertTrue(fileKey.isPresent());
     }
 }

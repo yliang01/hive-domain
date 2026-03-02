@@ -2,7 +2,6 @@ package cc.cc3c.hive.domain.repository;
 
 import cc.cc3c.hive.domain.entity.HiveRecord;
 import cc.cc3c.hive.domain.model.HiveDownloadStatus;
-import cc.cc3c.hive.domain.model.HiveRecordSource;
 import cc.cc3c.hive.domain.model.HiveRecordStatus;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -15,15 +14,27 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Collection;
 
 public interface HiveRecordRepository extends JpaRepository<HiveRecord, Integer>, JpaSpecificationExecutor<HiveRecord> {
 
-    Optional<HiveRecord> findBySourceAndFileKey(HiveRecordSource source, String fileKey);
+    Optional<HiveRecord> findByBucketNameAndFileKeyAndDeletedIsFalse(String bucketName, String fileKey);
 
+    List<HiveRecord> findByBucketNameAndDeletedIsFalse(String bucketName);
 
-    List<HiveRecord> findBySourceAndDeletedIsFalse(HiveRecordSource source);
+    Page<HiveRecord> findByBucketNameAndDeletedIsFalse(Pageable pageable, String bucketName);
 
-    Page<HiveRecord> findBySourceAndDeletedIsFalse(Pageable pageable, HiveRecordSource source);
+    Page<HiveRecord> findByBucketNameAndDeletedIsFalseAndFileNameContainingIgnoreCase(Pageable pageable, String bucketName, String keyword);
+
+    Page<HiveRecord> findByBucketNameAndDeletedIsFalseAndIdIn(Pageable pageable, String bucketName, Collection<Integer> ids);
+
+    Page<HiveRecord> findByBucketNameAndDeletedIsFalseAndIdInAndFileNameContainingIgnoreCase(Pageable pageable, String bucketName, Collection<Integer> ids, String keyword);
+
+    Page<HiveRecord> findByBucketNameAndDeletedIsFalseAndIdNotIn(Pageable pageable, String bucketName, Collection<Integer> ids);
+
+    Page<HiveRecord> findByBucketNameAndDeletedIsFalseAndIdNotInAndFileNameContainingIgnoreCase(Pageable pageable, String bucketName, Collection<Integer> ids, String keyword);
+
+    List<HiveRecord> findByBucketNameAndFileKeyInAndDeletedIsFalse(String bucketName, Collection<String> fileKeys);
 
     List<HiveRecord> findByStatusAndDeletedIsFalse(HiveRecordStatus status);
 
