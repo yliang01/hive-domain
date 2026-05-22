@@ -12,4 +12,6 @@ public interface HiveRecordImageMetaRepository extends JpaRepository<HiveRecordI
     Optional<HiveRecordImageMeta> findByHiveRecordId(Integer hiveRecordId);
 
     List<HiveRecordImageMeta> findByHiveRecordIdIn(Collection<Integer> hiveRecordIds);
+
+    List<HiveRecordImageMeta> findByThumbStatus(String thumbStatus);
 }

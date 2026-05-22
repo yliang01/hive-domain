@@ -17,14 +17,11 @@ public class FileCategoryEntity {
     private Long id;
     private String code;
     private String name;
-    private String description;
     @Column(name = "storage_class")
     @Enumerated(EnumType.STRING)
     private CategoryStorageClass storageClass;
     @Column(name = "bucket_name")
     private String bucketName;
-    @Column(name = "preview_policy")
-    private String previewPolicy;
     @Column(name = "ui_variant")
     private String uiVariant;
     @Column(name = "sort_order")
