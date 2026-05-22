@@ -18,6 +18,8 @@ import java.util.Collection;
 
 public interface HiveRecordRepository extends JpaRepository<HiveRecord, Integer>, JpaSpecificationExecutor<HiveRecord> {
 
+    Optional<HiveRecord> findByBucketNameAndFileKey(String bucketName, String fileKey);
+
     Optional<HiveRecord> findByBucketNameAndFileKeyAndDeletedIsFalse(String bucketName, String fileKey);
 
     List<HiveRecord> findByBucketNameAndDeletedIsFalse(String bucketName);
