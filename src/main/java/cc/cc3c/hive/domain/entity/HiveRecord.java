@@ -1,7 +1,6 @@
 package cc.cc3c.hive.domain.entity;
 
 import cc.cc3c.hive.domain.model.HiveDownloadStatus;
-import cc.cc3c.hive.domain.model.CategoryStorageClass;
 import cc.cc3c.hive.domain.model.HiveStorageProvider;
 import cc.cc3c.hive.domain.model.HiveRecordStatus;
 import jakarta.persistence.*;
@@ -26,9 +25,6 @@ public class HiveRecord {
     private HiveStorageProvider provider;
     @Column(name = "bucket_name")
     private String bucketName;
-    @Column(name = "storage_class_cache")
-    @Enumerated(EnumType.STRING)
-    private CategoryStorageClass storageClassCache;
     private Long size;
     private LocalDateTime updateTime;
     @Enumerated(EnumType.STRING)

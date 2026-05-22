@@ -27,8 +27,6 @@ public class FileCategoryEntity {
     private String previewPolicy;
     @Column(name = "ui_variant")
     private String uiVariant;
-    @Column(name = "is_system")
-    private Boolean system;
     @Column(name = "sort_order")
     private Integer sortOrder;
     private Boolean enabled;
