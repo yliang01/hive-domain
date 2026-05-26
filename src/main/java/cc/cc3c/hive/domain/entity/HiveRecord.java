@@ -3,6 +3,7 @@ package cc.cc3c.hive.domain.entity;
 import cc.cc3c.hive.domain.model.HiveDownloadStatus;
 import cc.cc3c.hive.domain.model.HiveStorageProvider;
 import cc.cc3c.hive.domain.model.HiveRecordStatus;
+import cc.cc3c.hive.domain.model.HiveRestoreStatusState;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,6 +34,10 @@ public class HiveRecord {
     private Boolean deletable;
     private Boolean deleted = false;
     private LocalDateTime restoreTime;
+    @Enumerated(EnumType.STRING)
+    private HiveRestoreStatusState restoreStatus;
+    private LocalDateTime restoreRequestedAt;
+    private LocalDateTime restoreStatusUpdatedAt;
     @Enumerated(EnumType.STRING)
     private HiveDownloadStatus downloadStatus;
 }
