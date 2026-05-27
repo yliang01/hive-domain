@@ -12,13 +12,11 @@ public interface FileCategoryRepository extends JpaRepository<FileCategoryEntity
 
     List<FileCategoryEntity> findByEnabledTrueOrderBySortOrderAscIdAsc();
 
-    Optional<FileCategoryEntity> findFirstByStorageClassAndEnabledTrueOrderBySortOrderAscIdAsc(CategoryStorageClass storageClass);
+    List<FileCategoryEntity> findAllByOrderBySortOrderAscIdAsc();
 
     boolean existsByCodeIgnoreCase(String code);
 
     boolean existsByBucketNameIgnoreCase(String bucketName);
 
     boolean existsByBucketNameIgnoreCaseAndIdNot(String bucketName, Long id);
-
-    Optional<FileCategoryEntity> findByBucketNameAndEnabledTrue(String bucketName);
 }
