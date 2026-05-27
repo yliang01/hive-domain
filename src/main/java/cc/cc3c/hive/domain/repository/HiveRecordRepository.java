@@ -18,30 +18,30 @@ import java.util.Collection;
 
 public interface HiveRecordRepository extends JpaRepository<HiveRecord, Integer>, JpaSpecificationExecutor<HiveRecord> {
 
-    Optional<HiveRecord> findByBucketNameAndFileKey(String bucketName, String fileKey);
+    Optional<HiveRecord> findByCategory_IdAndFileKey(Long categoryId, String fileKey);
 
-    Optional<HiveRecord> findByBucketNameAndFileKeyAndDeletedIsFalse(String bucketName, String fileKey);
+    Optional<HiveRecord> findByCategory_IdAndFileKeyAndDeletedIsFalse(Long categoryId, String fileKey);
 
-    List<HiveRecord> findByBucketNameAndDeletedIsFalse(String bucketName);
+    List<HiveRecord> findByCategory_IdAndDeletedIsFalse(Long categoryId);
 
-    Page<HiveRecord> findByBucketNameAndDeletedIsFalse(Pageable pageable, String bucketName);
+    Page<HiveRecord> findByCategory_IdAndDeletedIsFalse(Pageable pageable, Long categoryId);
 
-    Page<HiveRecord> findByBucketNameAndDeletedIsFalseAndFileNameContainingIgnoreCase(Pageable pageable, String bucketName, String keyword);
+    Page<HiveRecord> findByCategory_IdAndDeletedIsFalseAndFileNameContainingIgnoreCase(Pageable pageable, Long categoryId, String keyword);
 
-    Page<HiveRecord> findByBucketNameAndDeletedIsFalseAndIdIn(Pageable pageable, String bucketName, Collection<Integer> ids);
+    Page<HiveRecord> findByCategory_IdAndDeletedIsFalseAndIdIn(Pageable pageable, Long categoryId, Collection<Integer> ids);
 
-    Page<HiveRecord> findByBucketNameAndDeletedIsFalseAndIdInAndFileNameContainingIgnoreCase(Pageable pageable, String bucketName, Collection<Integer> ids, String keyword);
+    Page<HiveRecord> findByCategory_IdAndDeletedIsFalseAndIdInAndFileNameContainingIgnoreCase(Pageable pageable, Long categoryId, Collection<Integer> ids, String keyword);
 
-    Page<HiveRecord> findByBucketNameAndDeletedIsFalseAndIdNotIn(Pageable pageable, String bucketName, Collection<Integer> ids);
+    Page<HiveRecord> findByCategory_IdAndDeletedIsFalseAndIdNotIn(Pageable pageable, Long categoryId, Collection<Integer> ids);
 
-    Page<HiveRecord> findByBucketNameAndDeletedIsFalseAndIdNotInAndFileNameContainingIgnoreCase(Pageable pageable, String bucketName, Collection<Integer> ids, String keyword);
+    Page<HiveRecord> findByCategory_IdAndDeletedIsFalseAndIdNotInAndFileNameContainingIgnoreCase(Pageable pageable, Long categoryId, Collection<Integer> ids, String keyword);
 
-    List<HiveRecord> findByBucketNameAndFileKeyInAndDeletedIsFalse(String bucketName, Collection<String> fileKeys);
+    List<HiveRecord> findByCategory_IdAndFileKeyInAndDeletedIsFalse(Long categoryId, Collection<String> fileKeys);
 
-    List<HiveRecord> findByStatusAndDeletedIsFalse(HiveRecordStatus status);
+    List<HiveRecord> findByCategory_IdAndStatusAndDeletedIsFalse(Long categoryId, HiveRecordStatus status);
 
     @Transactional
     @Modifying
-    @Query("UPDATE HiveRecord r SET r.downloadStatus = :downloadStatus WHERE r.fileKey = :fileKey")
-    int updateDownloadStatus(@Param("fileKey") String fileKey, @Param("downloadStatus") HiveDownloadStatus downloadStatus);
+    @Query("UPDATE HiveRecord r SET r.downloadStatus = :downloadStatus WHERE r.category.id = :categoryId AND r.fileKey = :fileKey")
+    int updateDownloadStatus(@Param("categoryId") Long categoryId, @Param("fileKey") String fileKey, @Param("downloadStatus") HiveDownloadStatus downloadStatus);
 }

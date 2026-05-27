@@ -24,8 +24,9 @@ public class HiveRecord {
     private Boolean zipped;
     @Enumerated(EnumType.STRING)
     private HiveStorageProvider provider;
-    @Column(name = "bucket_name")
-    private String bucketName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private FileCategoryEntity category;
     private Long size;
     private LocalDateTime updateTime;
     @Enumerated(EnumType.STRING)
