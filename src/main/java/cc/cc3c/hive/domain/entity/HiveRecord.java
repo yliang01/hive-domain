@@ -25,7 +25,7 @@ public class HiveRecord {
     @Enumerated(EnumType.STRING)
     private HiveStorageProvider provider;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id")
     private FileCategoryEntity category;
     private Long size;
     private LocalDateTime updateTime;

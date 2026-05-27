@@ -43,6 +43,11 @@ public interface HiveRecordRepository extends JpaRepository<HiveRecord, Integer>
 
     @Transactional
     @Modifying
+    @Query("update HiveRecord r set r.category = null where r.category.id = :categoryId")
+    void detachFromCategory(@Param("categoryId") Long categoryId);
+
+    @Transactional
+    @Modifying
     @Query("UPDATE HiveRecord r SET r.downloadStatus = :downloadStatus WHERE r.category.id = :categoryId AND r.fileKey = :fileKey")
     int updateDownloadStatus(@Param("categoryId") Long categoryId, @Param("fileKey") String fileKey, @Param("downloadStatus") HiveDownloadStatus downloadStatus);
 
