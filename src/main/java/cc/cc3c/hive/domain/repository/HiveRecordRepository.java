@@ -2,7 +2,6 @@ package cc.cc3c.hive.domain.repository;
 
 import cc.cc3c.hive.domain.entity.HiveRecord;
 import cc.cc3c.hive.domain.model.HiveDownloadStatus;
-import cc.cc3c.hive.domain.model.HiveRecordFileView;
 import cc.cc3c.hive.domain.model.HiveRecordStatus;
 import cc.cc3c.hive.domain.model.HiveRestoreStatusState;
 import jakarta.transaction.Transactional;
@@ -23,8 +22,6 @@ public interface HiveRecordRepository extends JpaRepository<HiveRecord, Integer>
     Optional<HiveRecord> findByCategory_IdAndFileKey(Long categoryId, String fileKey);
 
     Optional<HiveRecord> findByCategory_IdAndFileKeyAndDeletedIsFalse(Long categoryId, String fileKey);
-
-    Optional<HiveRecordFileView> findViewByCategory_IdAndFileKeyAndDeletedIsFalse(Long categoryId, String fileKey);
 
     List<HiveRecord> findByCategory_IdAndDeletedIsFalse(Long categoryId);
 
