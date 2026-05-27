@@ -31,4 +31,12 @@ public class FileCategoryEntity {
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+    private LocalDateTime lastSyncTime;
+    private String lastSyncStatus;
+    private Integer lastSyncOssTotal;
+    private Integer lastSyncOssOnly;
+    private Integer lastSyncOssToDbMatched;
+    private Integer lastSyncOssToDbMismatched;
+    private Integer lastSyncDbToOssMismatched;
+    private String lastSyncMessage;
 }
