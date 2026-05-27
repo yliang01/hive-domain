@@ -23,9 +23,4 @@ public interface FileGroupRecordRepository extends JpaRepository<FileGroupRecord
     @Query("delete from FileGroupRecord gr where gr.hiveRecord.id = :hiveRecordId")
     void deleteByHiveRecord_Id(@Param("hiveRecordId") Integer hiveRecordId);
 
-    @Query("select gr.hiveRecord.id from FileGroupRecord gr where gr.group.category.code = :categoryCode")
-    List<Integer> findHiveRecordIdsByCategoryCode(@Param("categoryCode") String categoryCode);
-
-    @Query("select gr.hiveRecord.id from FileGroupRecord gr where gr.group.id = :groupId and gr.group.category.code = :categoryCode")
-    List<Integer> findHiveRecordIdsByGroupIdAndCategoryCode(@Param("groupId") Long groupId, @Param("categoryCode") String categoryCode);
 }

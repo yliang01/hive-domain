@@ -5,8 +5,6 @@ import cc.cc3c.hive.domain.model.HiveDownloadStatus;
 import cc.cc3c.hive.domain.model.HiveRecordStatus;
 import cc.cc3c.hive.domain.model.HiveRestoreStatusState;
 import jakarta.transaction.Transactional;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
@@ -24,18 +22,6 @@ public interface HiveRecordRepository extends JpaRepository<HiveRecord, Integer>
     Optional<HiveRecord> findByCategory_IdAndFileKeyAndDeletedIsFalse(Long categoryId, String fileKey);
 
     List<HiveRecord> findByCategory_IdAndDeletedIsFalse(Long categoryId);
-
-    Page<HiveRecord> findByCategory_IdAndDeletedIsFalse(Pageable pageable, Long categoryId);
-
-    Page<HiveRecord> findByCategory_IdAndDeletedIsFalseAndFileNameContainingIgnoreCase(Pageable pageable, Long categoryId, String keyword);
-
-    Page<HiveRecord> findByCategory_IdAndDeletedIsFalseAndIdIn(Pageable pageable, Long categoryId, Collection<Integer> ids);
-
-    Page<HiveRecord> findByCategory_IdAndDeletedIsFalseAndIdInAndFileNameContainingIgnoreCase(Pageable pageable, Long categoryId, Collection<Integer> ids, String keyword);
-
-    Page<HiveRecord> findByCategory_IdAndDeletedIsFalseAndIdNotIn(Pageable pageable, Long categoryId, Collection<Integer> ids);
-
-    Page<HiveRecord> findByCategory_IdAndDeletedIsFalseAndIdNotInAndFileNameContainingIgnoreCase(Pageable pageable, Long categoryId, Collection<Integer> ids, String keyword);
 
     List<HiveRecord> findByCategory_IdAndFileKeyInAndDeletedIsFalse(Long categoryId, Collection<String> fileKeys);
 
