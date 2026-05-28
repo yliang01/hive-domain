@@ -17,11 +17,11 @@ import java.util.Optional;
 
 public interface HiveRecordRepository extends JpaRepository<HiveRecord, Integer>, JpaSpecificationExecutor<HiveRecord> {
 
+    List<HiveRecord> findByCategory_IdAndDeletedIsFalse(Long categoryId);
+
     Optional<HiveRecord> findByCategory_IdAndFileKey(Long categoryId, String fileKey);
 
     Optional<HiveRecord> findByCategory_IdAndFileKeyAndDeletedIsFalse(Long categoryId, String fileKey);
-
-    List<HiveRecord> findByCategory_IdAndDeletedIsFalse(Long categoryId);
 
     List<HiveRecord> findByCategory_IdAndFileKeyInAndDeletedIsFalse(Long categoryId, Collection<String> fileKeys);
 

@@ -9,7 +9,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "file_group_record")
+@Table(
+        name = "file_group_record",
+        uniqueConstraints = @UniqueConstraint(name = "uk_fgr_record", columnNames = "hive_record_id")
+)
 public class FileGroupRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

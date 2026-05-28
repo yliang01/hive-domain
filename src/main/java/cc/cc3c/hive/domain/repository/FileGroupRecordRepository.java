@@ -9,17 +9,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 public interface FileGroupRecordRepository extends JpaRepository<FileGroupRecord, Long> {
     List<FileGroupRecord> findByHiveRecord_IdIn(Collection<Integer> hiveRecordIds);
-
-    Optional<FileGroupRecord> findByHiveRecord_IdAndGroup_Category_Code(Integer hiveRecordId, String categoryCode);
 
     @Transactional
     @Modifying
     @Query("delete from FileGroupRecord gr where gr.hiveRecord.id = :hiveRecordId")
     void deleteByHiveRecord_Id(@Param("hiveRecordId") Integer hiveRecordId);
+
+    @Transactional
+    @Modifying
+    @Query("delete from FileGroupRecord gr where gr.hiveRecord.id in :hiveRecordIds")
+    void deleteByHiveRecord_IdIn(@Param("hiveRecordIds") Collection<Integer> hiveRecordIds);
 
     @Transactional
     @Modifying
