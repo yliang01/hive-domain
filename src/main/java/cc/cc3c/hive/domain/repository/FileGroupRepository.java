@@ -9,11 +9,7 @@ import java.util.Optional;
 public interface FileGroupRepository extends JpaRepository<FileGroup, Long> {
     List<FileGroup> findByCategory_CodeOrderBySortOrderAscIdAsc(String categoryCode);
 
-    List<FileGroup> findByCategory_CodeAndEnabledTrueOrderBySortOrderAscIdAsc(String categoryCode);
-
-    Optional<FileGroup> findByIdAndCategory_Code(Long id, String categoryCode);
-
-    Optional<FileGroup> findByIdAndCategory_CodeAndEnabledTrue(Long id, String categoryCode);
+    Optional<FileGroup> findByCategory_CodeAndGroupCodeIgnoreCase(String categoryCode, String groupCode);
 
     boolean existsByCategory_CodeAndGroupCodeIgnoreCase(String categoryCode, String groupCode);
 

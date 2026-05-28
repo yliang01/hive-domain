@@ -23,11 +23,8 @@ public class FileGroup {
     private String groupCode;
     @Column(name = "group_name")
     private String groupName;
-    @Column(name = "group_desc")
-    private String groupDesc;
     @Column(name = "sort_order")
     private Integer sortOrder;
-    private Boolean enabled;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
