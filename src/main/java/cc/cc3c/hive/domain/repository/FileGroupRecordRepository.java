@@ -16,11 +16,14 @@ public interface FileGroupRecordRepository extends JpaRepository<FileGroupRecord
 
     Optional<FileGroupRecord> findByHiveRecord_IdAndGroup_Category_Code(Integer hiveRecordId, String categoryCode);
 
-    long countByGroup_Id(Long groupId);
-
     @Transactional
     @Modifying
     @Query("delete from FileGroupRecord gr where gr.hiveRecord.id = :hiveRecordId")
     void deleteByHiveRecord_Id(@Param("hiveRecordId") Integer hiveRecordId);
+
+    @Transactional
+    @Modifying
+    @Query("delete from FileGroupRecord gr where gr.group.id = :groupId")
+    void deleteByGroup_Id(@Param("groupId") Long groupId);
 
 }
