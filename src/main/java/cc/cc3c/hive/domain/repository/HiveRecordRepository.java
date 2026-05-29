@@ -23,7 +23,6 @@ public interface HiveRecordRepository extends JpaRepository<HiveRecord, Integer>
 
     List<HiveRecord> findByCategory_IdAndFileKeyInAndDeletedIsFalse(Long categoryId, Collection<String> fileKeys);
 
-    List<HiveRecord> findByCategory_IdAndStatusAndDeletedIsFalse(Long categoryId, HiveRecordStatus status);
 
     @Transactional
     @Modifying

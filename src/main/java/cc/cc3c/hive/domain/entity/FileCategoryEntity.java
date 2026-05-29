@@ -38,5 +38,6 @@ public class FileCategoryEntity {
     private Integer lastSyncOssToDbMatched;
     private Integer lastSyncOssToDbMismatched;
     private Integer lastSyncDbToOssMismatched;
+    private Integer lastSyncSkipped;
     private String lastSyncMessage;
 }
