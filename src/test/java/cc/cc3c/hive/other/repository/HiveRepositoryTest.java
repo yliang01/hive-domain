@@ -12,6 +12,7 @@ import cc.cc3c.hive.domain.repository.HiveRecordRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
@@ -79,6 +80,13 @@ public class HiveRepositoryTest extends AbstractTransactionalTestNGSpringContext
         Assert.assertEquals(assigned.getGroup().getGroupCode(), "FIRST");
         Assert.assertEquals(fileGroupRepository.findById(firstGroup.getId()).orElseThrow().getRecords().size(), 1);
 
+        HiveRecord pageRecord = hiveRecordRepository.findAll(
+                (root, query, builder) -> builder.equal(root.get("id"), record.getId()), PageRequest.of(0, 10))
+                .getContent().getFirst();
+        entityManager.clear();
+        Assert.assertEquals(pageRecord.getGroup().getGroupCode(), "FIRST");
+
+        assigned = hiveRecordRepository.findWithGroupByIdIn(List.of(record.getId())).getFirst();
         assigned.assignTo(secondGroup);
         hiveRecordRepository.saveAndFlush(assigned);
         entityManager.clear();
