@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,4 +32,12 @@ public class FileGroup {
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @Setter(lombok.AccessLevel.NONE)
+    @OneToMany(mappedBy = "group", fetch = FetchType.LAZY)
+    private List<HiveRecord> records = new ArrayList<>();
+
+    public List<HiveRecord> getRecords() {
+        return Collections.unmodifiableList(records);
+    }
 }

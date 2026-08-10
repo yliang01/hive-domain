@@ -4,6 +4,7 @@ import cc.cc3c.hive.domain.model.HiveDownloadStatus;
 import cc.cc3c.hive.domain.model.HiveStorageProvider;
 import cc.cc3c.hive.domain.model.HiveRecordStatus;
 import cc.cc3c.hive.domain.model.HiveRestoreStatusState;
+import cc.cc3c.hive.domain.model.HiveLocalCheckStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,7 +28,16 @@ public class HiveRecord {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private FileCategoryEntity category;
+    @Setter(AccessLevel.NONE)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "file_group_record",
+            joinColumns = @JoinColumn(name = "hive_record_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id")
+    )
+    private FileGroup group;
     private Long size;
+    private Long originalSize;
     private LocalDateTime updateTime;
     @Enumerated(EnumType.STRING)
     private HiveRecordStatus status;
@@ -41,4 +51,16 @@ public class HiveRecord {
     private LocalDateTime restoreStatusUpdatedAt;
     @Enumerated(EnumType.STRING)
     private HiveDownloadStatus downloadStatus;
+    @Enumerated(EnumType.STRING)
+    private HiveLocalCheckStatus localCheckStatus;
+    private LocalDateTime localCheckTime;
+    private Long localCheckObservedSize;
+
+    public void assignTo(FileGroup group) {
+        this.group = group;
+    }
+
+    public void clearGroup() {
+        this.group = null;
+    }
 }
