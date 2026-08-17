@@ -30,12 +30,6 @@ public class HiveRecordImageMeta {
     @Column(name = "thumb_status", length = 32)
     private String thumbStatus; // PENDING, READY, FAILED
 
-    @Column(name = "image_width")
-    private Integer imageWidth;
-
-    @Column(name = "image_height")
-    private Integer imageHeight;
-
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
