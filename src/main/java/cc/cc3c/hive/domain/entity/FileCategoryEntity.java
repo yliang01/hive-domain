@@ -40,13 +40,4 @@ public class FileCategoryEntity {
     private Integer lastSyncDbToOssMismatched;
     private Integer lastSyncSkipped;
     private String lastSyncMessage;
-    private LocalDateTime lastLocalCheckTime;
-    private String lastLocalCheckStatus;
-    private Integer lastLocalCheckRecordTotal;
-    private Integer lastLocalCheckSizeMatched;
-    private Integer lastLocalCheckSizeChanged;
-    private Integer lastLocalCheckMissing;
-    private Integer lastLocalCheckUnverifiable;
-    private Integer lastLocalCheckBaselineMissing;
-    private String lastLocalCheckMessage;
 }

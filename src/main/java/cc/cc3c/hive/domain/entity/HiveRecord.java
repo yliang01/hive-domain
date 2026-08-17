@@ -4,7 +4,6 @@ import cc.cc3c.hive.domain.model.HiveDownloadStatus;
 import cc.cc3c.hive.domain.model.HiveStorageProvider;
 import cc.cc3c.hive.domain.model.HiveRecordStatus;
 import cc.cc3c.hive.domain.model.HiveRestoreStatusState;
-import cc.cc3c.hive.domain.model.HiveLocalCheckStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -51,10 +50,6 @@ public class HiveRecord {
     private LocalDateTime restoreStatusUpdatedAt;
     @Enumerated(EnumType.STRING)
     private HiveDownloadStatus downloadStatus;
-    @Enumerated(EnumType.STRING)
-    private HiveLocalCheckStatus localCheckStatus;
-    private LocalDateTime localCheckTime;
-    private Long localCheckObservedSize;
 
     public void assignTo(FileGroup group) {
         this.group = group;

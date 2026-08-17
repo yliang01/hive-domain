@@ -76,7 +76,7 @@ public class HiveRepositoryTest extends AbstractTransactionalTestNGSpringContext
         hiveRecordRepository.saveAndFlush(record);
         entityManager.clear();
 
-        HiveRecord assigned = hiveRecordRepository.findWithGroupByIdIn(List.of(record.getId())).getFirst();
+        HiveRecord assigned = findWithGroup(category.getId(), record.getFileKey());
         Assert.assertEquals(assigned.getGroup().getGroupCode(), "FIRST");
         Assert.assertEquals(fileGroupRepository.findById(firstGroup.getId()).orElseThrow().getRecords().size(), 1);
 
@@ -86,19 +86,19 @@ public class HiveRepositoryTest extends AbstractTransactionalTestNGSpringContext
         entityManager.clear();
         Assert.assertEquals(pageRecord.getGroup().getGroupCode(), "FIRST");
 
-        assigned = hiveRecordRepository.findWithGroupByIdIn(List.of(record.getId())).getFirst();
+        assigned = findWithGroup(category.getId(), record.getFileKey());
         assigned.assignTo(secondGroup);
         hiveRecordRepository.saveAndFlush(assigned);
         entityManager.clear();
 
-        HiveRecord reassigned = hiveRecordRepository.findWithGroupByIdIn(List.of(record.getId())).getFirst();
+        HiveRecord reassigned = findWithGroup(category.getId(), record.getFileKey());
         Assert.assertEquals(reassigned.getGroup().getGroupCode(), "SECOND");
 
         reassigned.clearGroup();
         hiveRecordRepository.saveAndFlush(reassigned);
         entityManager.clear();
 
-        HiveRecord ungrouped = hiveRecordRepository.findWithGroupByIdIn(List.of(record.getId())).getFirst();
+        HiveRecord ungrouped = findWithGroup(category.getId(), record.getFileKey());
         Assert.assertNull(ungrouped.getGroup());
     }
 
@@ -112,6 +112,10 @@ public class HiveRepositoryTest extends AbstractTransactionalTestNGSpringContext
         category.setSortOrder(0);
         category.setEnabled(true);
         return fileCategoryRepository.save(category);
+    }
+
+    private HiveRecord findWithGroup(Long categoryId, String fileKey) {
+        return hiveRecordRepository.findWithGroupByCategory_IdAndFileKeyInAndDeletedIsFalse(categoryId, List.of(fileKey)).getFirst();
     }
 
     private FileGroup createGroup(FileCategoryEntity category, String code) {
